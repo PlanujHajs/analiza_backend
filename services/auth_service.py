@@ -90,19 +90,19 @@ class AuthService:
         return Token(access_token=access_token, token_type="bearer")
 
     async def change_password(
-            self,
-            current_user: User,
-            change_data: ChangePassword
+        self,
+        current_user: User,
+        change_data: ChangePassword
         ) -> None:
            
-            if not verify_password(change_data.old_password, current_user.hashed_password):
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Stare hasło jest niepoprawne."
+        if not verify_password(change_data.old_password, current_user.hashed_password):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Stare hasło jest niepoprawne."
                 )
 
-            new_hashed = get_password_hash(change_data.new_password)
+        new_hashed = get_password_hash(change_data.new_password)
 
-            await self.user_repo.update_password(current_user, new_hashed)
+        await self.user_repo.update_password(current_user, new_hashed)
 
-            return
+        return
