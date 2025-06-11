@@ -37,7 +37,6 @@ class ChartsService:
             block = block.replace('-', '0').astype(int)
 
             for category in self.CATEGORIES:
-
                 cum_values = block.loc[category].values
                 monthly_values = np.diff(np.insert(cum_values, 0, 0))
 
