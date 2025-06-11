@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from database import engine, Base
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth
+from routers import auth, charts
 
 app = FastAPI(title="Analiza backend")
 
@@ -15,6 +15,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(charts.router)
 
 
 @app.on_event("startup")
